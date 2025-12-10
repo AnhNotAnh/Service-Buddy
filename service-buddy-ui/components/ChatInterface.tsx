@@ -859,7 +859,7 @@ return (
             deleteSpeed={100}
             pauseDuration={2500}
             />
-            <span className="text-gray-600 dark:text-gray-400">')</span>
+            <span className="text-gray-600 dark:text-gray-400">&apos;)</span>
         </div>
         
         <div className="flex gap-4 items-end">
@@ -972,19 +972,19 @@ return (
                     onClick={() => fillAndSend('I lost my job and need help with payments')}
                     className="w-full p-3 text-left bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg text-sm transition-colors text-gray-800 dark:text-gray-200"
                 >
-                    "I lost my job and need help with payments"
+                    &quot;I lost my job and need help with payments&quot;
                 </button>
                 <button
                     onClick={() => fillAndSend('We just had a baby')}
                     className="w-full p-3 text-left bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg text-sm transition-colors text-gray-800 dark:text-gray-200"
                 >
-                    "We just had a baby"
+                    &quot;We just had a baby&quot;
                 </button>
                 <button
                     onClick={() => fillAndSend('I lost my home due to natural disaster')}
                     className="w-full p-3 text-left bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg text-sm transition-colors text-gray-800 dark:text-gray-200"
                 >
-                    "I lost my home due to natural disaster"
+                    &quot;I lost my home due to natural disaster&quot;
                 </button>
                 </div>
             </div>

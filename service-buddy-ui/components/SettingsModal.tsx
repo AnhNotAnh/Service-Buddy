@@ -63,7 +63,7 @@ export default function SettingsModal({
           {/* Current Usage (Basic Mode) */}
           {currentMode === 'basic' && usageInfo && (
             <div className="bg-gray-100 dark:bg-gray-700 rounded-lg p-4">
-              <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">Today's Usage</h3>
+              <h3 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">Today&apos;s Usage</h3>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-700 dark:text-gray-300">AI-enhanced responses used:</span>
                 <span className="font-medium text-gray-900 dark:text-white">{usageInfo.used}/{usageInfo.limit}</span>
@@ -203,7 +203,7 @@ export default function SettingsModal({
             <ol className="text-sm text-gray-600 dark:text-gray-400 space-y-1 list-decimal list-inside">
               <li>Visit <a href="https://ai.google.dev/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Google AI Studio</a></li>
               <li>Sign in with your Google account</li>
-              <li>Click "Get API key" and create a new key</li>
+              <li>Click &quot;Get API key&quot; and create a new key</li>
               <li>Copy the API key and paste it above</li>
             </ol>
             <div className="mt-3 p-3 bg-yellow-50 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-700 rounded-lg">

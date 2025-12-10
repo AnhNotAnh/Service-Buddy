@@ -1,6 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { GoogleGenerativeAI } from '@google/generative-ai'
 
+// Service type definition
+interface Service {
+  id: string;
+  title: string;
+  agency: string;
+  description: string;
+  eligibility: string[];
+  phone: string;
+  applyUrl: string;
+  actionSteps: string[];
+  processingTime?: string;
+  immediateHelp?: string;
+  urgentAction?: string;
+}
+
 // API usage tracking
 const dailyUsage = new Map<string, { count: number, date: string }>()
 const DAILY_LIMIT = 10
@@ -358,7 +373,7 @@ export async function POST(request: NextRequest) {
     let response: string
     let aiEnhanced = false
     let usageInfo = null
-    let relevantServices: any[] = []
+    let relevantServices: Service[] = []
 
     if (directIntent) {
       // Tier 3: We have prepared answers - use them
@@ -565,7 +580,7 @@ function detectPossibleIntents(text: string): string[] {
 }
 
 // Natural conversational response builder
-function buildAgenticResponse(services: any[], intents: string[], message: string): string {
+function buildAgenticResponse(services: Service[], intents: string[], _message: string): string {
   if (services.length === 0) {
     return "I can help you find government services for situations like job loss, having a baby, natural disasters, becoming a carer, or other life events. What would you like to know about?"
   }
@@ -593,7 +608,7 @@ function buildAgenticResponse(services: any[], intents: string[], message: strin
   return `I've found some services that might help with your situation. The best place to start is usually calling Services Australia at 131 202 - they can help determine what you're eligible for and guide you through the application process. Would you like me to explain more about any specific services?`
 }
 
-function generateResponse(intent: string, services: any[]): string {
+function generateResponse(intent: string, services: Service[]): string {
   const responses = {
     job_loss: `I understand you've lost your job - this is a difficult time. I've found ${services.length} key services that can help provide financial support and get you back on your feet. Let me explain what you might be eligible for.`,
     birth: `Congratulations on your new addition to the family! There are ${services.length} important services to help support you and your baby. Let me walk you through what you'll need to do.`,

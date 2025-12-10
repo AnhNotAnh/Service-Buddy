@@ -1,5 +1,20 @@
 import React, { useState, useEffect } from 'react';
 
+// Type definitions for Web Speech API
+interface SpeechRecognitionType extends EventTarget {
+  continuous: boolean;
+  interimResults: boolean;
+  onresult: (event: SpeechRecognitionEventType) => void;
+  onend: () => void;
+  start: () => void;
+  stop: () => void;
+}
+
+interface SpeechRecognitionEventType {
+  resultIndex: number;
+  results: SpeechRecognitionResultList;
+}
+
 interface VoiceInputProps {
   onTranscriptComplete: (transcript: string) => void;
   onTranscriptUpdate?: (transcript: string) => void;
@@ -8,16 +23,19 @@ interface VoiceInputProps {
 const VoiceInput: React.FC<VoiceInputProps> = ({ onTranscriptComplete, onTranscriptUpdate }) => {
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState('');
-  const [recognition, setRecognition] = useState<any>(null);
+  const [recognition, setRecognition] = useState<SpeechRecognitionType | null>(null);
 
   useEffect(() => {
     // Browser Speech Recognition setup
     if ('webkitSpeechRecognition' in window) {
-      const recognition = new (window as any).webkitSpeechRecognition();
+      const SpeechRecognitionConstructor = (window as typeof window & {
+        webkitSpeechRecognition: new () => SpeechRecognitionType;
+      }).webkitSpeechRecognition;
+      const recognition = new SpeechRecognitionConstructor();
       recognition.continuous = true;
       recognition.interimResults = true;
 
-      recognition.onresult = (event: any) => {
+      recognition.onresult = (event: SpeechRecognitionEventType) => {
         const current = event.resultIndex;
         const transcriptText = event.results[current][0].transcript;
         setTranscript(transcriptText);
